@@ -1,0 +1,45 @@
+:root .reference-login,:root .reference-login .login-promo,:root .reference-login .login-form-side,:root .reference-login .reference-login-card,:root .reference-login .login-input,:root .reference-login .login-security,:root .reference-login .reference-login-submit,:root .reference-login .login-theme-toggle{transition:background-color .35s ease,background-image .35s ease,color .35s ease,border-color .35s ease,box-shadow .35s ease}
+.login-promo-brand img{display:block;width:92px;height:70px;object-fit:contain;object-position:left center}
+:root:not(.dark) .login-promo-brand strong{color:#ffffff}
+:root:not(.dark) .login-promo-brand span{color:#d7e7ee}
+:root:not(.dark) .login-promo-copy h1{color:#ffffff}
+:root:not(.dark) .login-promo-copy p{color:#eef6f9}
+:root:not(.dark) .login-promo-copy em{color:#33dfd2}
+:root:not(.dark) .login-benefits strong{color:#ffffff}
+:root:not(.dark) .login-benefits small{color:#d9eaee}
+:root:not(.dark) .login-form-side{background:radial-gradient(circle at 100% 0,#eaf7ff 0,transparent 32%),#f8fbff}
+:root:not(.dark) .reference-login{grid-template-columns:50% 50%;overflow-x:hidden;transition:background-color .35s ease,color .35s ease}
+:root:not(.dark) .login-promo{padding:52px 8%;transition:background .35s ease,color .35s ease}
+:root:not(.dark) .login-promo-brand strong{font-size:29px}
+:root:not(.dark) .login-promo-brand span{font-size:14px}
+:root:not(.dark) .login-promo-copy{margin-top:96px}
+:root:not(.dark) .login-promo-copy h1{font-size:47px;line-height:1.2;margin:26px 0 18px}
+:root:not(.dark) .login-promo-copy p{font-size:16px}
+:root:not(.dark) .login-benefits{margin-top:36px;padding:24px}
+:root:not(.dark) .login-form-side{padding:36px;overflow:hidden;transition:background .35s ease}
+:root:not(.dark) .login-theme-toggle{position:absolute;top:24px;right:26px;z-index:2;display:grid;place-items:center;width:38px;height:38px;border:1px solid #dfe8ee;border-radius:10px;background:#fff;color:#35516b;box-shadow:0 5px 16px #234b6512}
+:root:not(.dark) .reference-login-card{width:min(100%,480px);padding:32px 40px 34px;background:#ffffff;border-color:#e2ebf1;box-shadow:0 20px 45px #234b6520;transition:background .35s ease,border-color .35s ease,box-shadow .35s ease}
+:root:not(.dark) .reference-login-heading>span{background:#e3f8f6;border:1px solid #cbeeed;color:#07999a}
+:root:not(.dark) .reference-login-heading em{color:#07999a}
+:root:not(.dark) .reference-login-heading h2{color:#173049}
+:root:not(.dark) .reference-login-heading h2{font-size:33px}
+:root:not(.dark) .reference-login-heading h2 b{color:#07999a}
+:root:not(.dark) .reference-login-heading p{color:#71879a}
+:root:not(.dark) .reference-login-card>label{color:#405a70}
+:root:not(.dark) .reference-login-card>label{font-size:12px}
+:root:not(.dark) .login-input{height:52px;border-color:#d5e1e9;background:#ffffff;color:#07999a;transition:background .35s ease,border-color .35s ease,color .35s ease}
+:root:not(.dark) .login-input input{background:#ffffff;color:#173049}
+:root:not(.dark) .login-input input::placeholder{color:#91a3b5}
+:root:not(.dark) .login-input button{color:#607993}
+:root:not(.dark) .login-options label{color:#667e93}
+:root:not(.dark) .login-options{font-size:13px}
+:root:not(.dark) .login-options button{color:#078f91}
+:root:not(.dark) .reference-login-submit{height:52px;background:linear-gradient(100deg,#10aaa7,#087b83);box-shadow:0 10px 20px #08aba933;transition:background .35s ease,box-shadow .35s ease,color .35s ease}
+:root:not(.dark) .login-divider span{background:#dfe8ee}
+:root:not(.dark) .login-security{padding:16px 18px;border-color:#e1e9ef;background:#f8fbfd;color:#7890a6;transition:background .35s ease,border-color .35s ease,color .35s ease}
+:root:not(.dark) .login-form-side footer{color:#71879a}
+.dark .login-theme-toggle{position:absolute;top:24px;right:26px;z-index:2;display:grid;place-items:center;width:38px;height:38px;border:1px solid #2b4a60;border-radius:10px;background:#102c3c;color:#f0c75e}
+@media(max-width:1000px){:root:not(.dark) .reference-login{grid-template-columns:42% 58%}:root:not(.dark) .login-promo{padding:40px 7%}:root:not(.dark) .login-promo-copy h1{font-size:38px}:root:not(.dark) .reference-login-card{padding:28px}}
+@media(max-width:720px){:root:not(.dark) .reference-login{display:block;overflow-x:hidden}:root:not(.dark) .login-promo{min-height:275px;padding:29px 26px}:root:not(.dark) .login-promo-brand strong{font-size:25px}:root:not(.dark) .login-promo-brand span{font-size:12px}:root:not(.dark) .login-promo-copy{margin-top:50px}:root:not(.dark) .login-promo-copy h1{font-size:32px}:root:not(.dark) .login-form-side{min-height:calc(100vh - 275px);padding:28px 18px 75px}:root:not(.dark) .reference-login-card{padding:25px 22px}:root:not(.dark) .reference-login-heading h2{font-size:29px}:root:not(.dark) .login-form-side footer{bottom:22px;font-size:12px}}
+@media(max-width:400px){:root:not(.dark) .reference-login-card{padding:21px}:root:not(.dark) .reference-login-heading{padding-top:51px}:root:not(.dark) .reference-login-heading>span{width:48px;height:48px}}
+:root:not(.dark) .login-promo,:root:not(.dark) .login-form-side{min-width:0}

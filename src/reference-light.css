@@ -1,0 +1,47 @@
+:root:not(.dark) .medata-shell:has(.ref-dashboard){--bg:#f7f9fc;--surface:#fff;--text:#243b53;background:#f7f9fc}
+:root:not(.dark) .medata-shell:has(.ref-dashboard) .main-content,:root:not(.dark) .medata-shell:has(.ref-dashboard) .topbar{background:#fff}
+:root:not(.dark) .medata-shell:has(.ref-dashboard) .topbar{border-color:#edf1f5}
+:root:not(.dark) .medata-shell:has(.ref-dashboard) .topbar h1{color:#172b4d}
+:root:not(.dark) .medata-shell:has(.ref-dashboard) .sidebar{background:#fff;border-right-color:#edf1f5}
+:root:not(.dark) .medata-shell:has(.ref-dashboard) .nav-link{color:#40536b}
+:root:not(.dark) .medata-shell:has(.ref-dashboard) .nav-link:hover,:root:not(.dark) .medata-shell:has(.ref-dashboard) .nav-link.active{color:#087f82;background:#e7f8f7;box-shadow:none}
+:root:not(.dark) .ref-dashboard{color:#243b53}
+:root:not(.dark) .ref-stat,:root:not(.dark) .ref-active-card,:root:not(.dark) .ref-weekly,:root:not(.dark) .ref-chart-card,:root:not(.dark) .ref-activity,:root:not(.dark) .ref-info{border-color:#e8edf2;background:#fff;box-shadow:0 8px 24px #234b6510}
+:root:not(.dark) .ref-stat span,:root:not(.dark) .ref-active-card p,:root:not(.dark) .ref-weekly p,:root:not(.dark) .ref-chart-card p,:root:not(.dark) .ref-activity p,:root:not(.dark) .ref-info p{color:#718096}
+:root:not(.dark) .ref-stat strong,:root:not(.dark) .ref-active-card h3,:root:not(.dark) .ref-weekly h3,:root:not(.dark) .ref-chart-card h3,:root:not(.dark) .ref-activity h3,:root:not(.dark) .ref-info h3{color:#172b4d}
+:root:not(.dark) .ref-active-row,:root:not(.dark) .ref-activity-row,:root:not(.dark) .ref-info-row{border-color:#edf1f5}
+:root:not(.dark) .ref-active-row strong,:root:not(.dark) .ref-activity-row strong{color:#243b53}
+:root:not(.dark) .ref-checkin{color:#fff}
+:root:not(.dark) .ref-dashboard svg{color:inherit}
+:root:not(.dark) .medata-shell{--ink:#243b53;--muted:#718096;--line:#e6edf2;--panel:#fff;--panel-2:#f7fafc;--teal:#07999a;--aqua:#16b8b4;background:#f7f9fc;color:#243b53}
+:root:not(.dark) .medata-shell .main-content{background:#f7f9fc}
+:root:not(.dark) .medata-shell .topbar{background:#ffffff;border-bottom-color:#edf1f5;color:#243b53}
+:root:not(.dark) .medata-shell .topbar h1,:root:not(.dark) .medata-shell .page-heading h2{color:#172b4d}
+:root:not(.dark) .medata-shell .topbar .eyebrow,:root:not(.dark) .medata-shell .eyebrow{color:#07999a}
+:root:not(.dark) .medata-shell .sidebar{background:#fff;border-right-color:#edf1f5}
+:root:not(.dark) .medata-shell .brand strong,:root:not(.dark) .medata-shell .nav-link{color:#40536b}
+:root:not(.dark) .medata-shell .nav-link:hover,:root:not(.dark) .medata-shell .nav-link.active{color:#087f82;background:#e7f8f7;box-shadow:none}
+:root:not(.dark) .medata-shell .location-switch,:root:not(.dark) .medata-shell .icon-button{background:#fff;border-color:#e0e8ef;color:#40536b}
+:root:not(.dark) .medata-shell .collapse-btn{color:#40536b}
+:root:not(.dark) .medata-shell .collapse-btn:hover{color:#087f82}
+:root:not(.dark) .medata-shell .location-switch select{background:#fff;color:#40536b}
+:root:not(.dark) .medata-shell .user-chip strong{color:#243b53}
+:root:not(.dark) .medata-shell .user-chip small,:root:not(.dark) .medata-shell .page-heading p,:root:not(.dark) .medata-shell .muted{color:#718096}
+:root:not(.dark) .medata-shell .panel,:root:not(.dark) .medata-shell .stat-card,:root:not(.dark) .medata-shell .form-card,:root:not(.dark) .medata-shell .table-wrap,:root:not(.dark) .medata-shell .dialog,:root:not(.dark) .medata-shell .settings-list,:root:not(.dark) .medata-shell .detail-grid,:root:not(.dark) .medata-shell .detail-item{background:#fff;border-color:#e6edf2;color:#243b53;box-shadow:0 8px 24px #234b6510}
+:root:not(.dark) .medata-shell .panel h3,:root:not(.dark) .medata-shell .stat-card strong,:root:not(.dark) .medata-shell .dialog h3{color:#172b4d}
+:root:not(.dark) .medata-shell .table-wrap th,:root:not(.dark) .medata-shell .table-wrap td{border-color:#edf1f5}
+:root:not(.dark) .medata-shell .table-wrap th{color:#627d98}
+:root:not(.dark) .medata-shell .table-wrap td strong{color:#243b53}
+:root:not(.dark) .medata-shell input,:root:not(.dark) .medata-shell textarea,:root:not(.dark) .medata-shell select,:root:not(.dark) .medata-shell .filter-input{background:#fff;border-color:#d5e1e9;color:#243b53}
+:root:not(.dark) .medata-shell .guide-overlay{background:#eef4f9b3}
+:root:not(.dark) .medata-shell .guide-card{background:#ffffff;box-shadow:0 24px 60px #234b6526}
+:root:not(.dark) .medata-shell .guide-close{border-color:#d5e1e9;color:#718096}
+:root:not(.dark) .medata-shell .guide-close:hover{background:#f2f7fa;color:#40536b}
+:root:not(.dark) .medata-shell .guide-head h3,:root:not(.dark) .medata-shell .guide-body h4,:root:not(.dark) .medata-shell .confirm-card h3{color:#172b4d}
+:root:not(.dark) .medata-shell .guide-body{background:#f7fafc}
+:root:not(.dark) .medata-shell .guide-body p{color:#51697e}
+:root:not(.dark) .medata-shell .guide-dots .dot{background:#ccd9e4}
+:root:not(.dark) .medata-shell .guide-skip:hover{color:#0b9c9c}
+:root:not(.dark) .medata-shell .guide-next{box-shadow:0 8px 18px #0b9c9c33}
+:root:not(.dark) .medata-shell .confirm-icon{color:#d64545;background:#fdeef0;border-color:#f3cdd1;box-shadow:none}
+:root:not(.dark) .medata-shell .confirm-danger{box-shadow:0 8px 20px #d6454533}

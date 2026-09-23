@@ -1,0 +1,130 @@
+.auth-bg{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;isolation:isolate}
+.login-promo-brand,.login-promo-copy,.login-benefits{position:relative;z-index:2}
+.dna-network-canvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  z-index:1;
+  opacity:.92;
+  mix-blend-mode:screen;
+}
+
+.auth-bg-glow,.auth-bg-orb,.auth-bg-grid,.auth-p{
+  position:absolute;pointer-events:none;will-change:transform,opacity
+}
+
+.auth-bg-glow{border-radius:50%;filter:blur(60px)}
+.auth-bg-glow--1{
+  width:58vmax;height:58vmax;left:-22vmax;bottom:-20vmax;
+  background:radial-gradient(circle,rgba(20,207,202,.20) 0,rgba(20,207,202,.05) 38%,transparent 64%);
+  animation:authGlow1 26s cubic-bezier(.4,.2,.2,1) infinite
+}
+.auth-bg-glow--2{
+  width:50vmax;height:50vmax;right:-20vmax;top:-18vmax;
+  background:radial-gradient(circle,rgba(14,141,187,.18) 0,rgba(14,141,187,.04) 42%,transparent 66%);
+  animation:authGlow2 32s cubic-bezier(.4,.2,.2,1) infinite
+}
+
+.auth-bg-orb{border-radius:50%;filter:blur(28px)}
+.auth-bg-orb--1{
+  width:260px;height:260px;left:12%;bottom:18%;
+  background:radial-gradient(circle,rgba(23,216,207,.22),transparent 68%);
+  animation:authOrb1 18s cubic-bezier(.45,.05,.55,.95) infinite
+}
+.auth-bg-orb--2{
+  width:220px;height:220px;right:10%;top:16%;
+  background:radial-gradient(circle,rgba(15,157,191,.20),transparent 68%);
+  animation:authOrb2 24s cubic-bezier(.45,.05,.55,.95) infinite
+}
+.auth-bg-orb--3{
+  width:180px;height:180px;left:38%;top:44%;
+  background:radial-gradient(circle,rgba(30,210,196,.16),transparent 66%);
+  animation:authOrb3 20s ease-in-out infinite
+}
+
+.auth-bg-grid{
+  inset:-20px;opacity:.10;
+  background-image:radial-gradient(rgba(18,207,199,.55) 1px,transparent 1px);
+  background-size:44px 44px;
+  animation:authGridPulse 24s ease-in-out infinite
+}
+
+.login-promo:before,.login-promo:after{will-change:transform,opacity}
+.login-promo:before{animation:authRingA 30s ease-in-out infinite}
+.login-promo:after{animation:authRingB 26s ease-in-out infinite}
+
+.auth-p{
+  width:4px;height:4px;border-radius:50%;
+  background:rgba(46,226,216,.5);
+  animation:authParticle 16s linear infinite
+}
+.auth-p:nth-child(odd){
+  background:rgba(35,205,190,.4);width:3px;height:3px
+}
+.auth-p:nth-child(7){left:8%;bottom:-2%;animation-delay:0s;animation-duration:17s}
+.auth-p:nth-child(8){left:22%;bottom:-2%;animation-delay:-3s;animation-duration:21s}
+.auth-p:nth-child(9){left:36%;bottom:-2%;animation-delay:-7s;animation-duration:14s}
+.auth-p:nth-child(10){left:50%;bottom:-2%;animation-delay:-2s;animation-duration:19s}
+.auth-p:nth-child(11){left:63%;bottom:-2%;animation-delay:-9s;animation-duration:23s}
+.auth-p:nth-child(12){left:75%;bottom:-2%;animation-delay:-5s;animation-duration:15s}
+.auth-p:nth-child(13){left:86%;bottom:-2%;animation-delay:-11s;animation-duration:20s}
+.auth-p:nth-child(14){left:94%;bottom:-2%;animation-delay:-4s;animation-duration:18s}
+
+@keyframes authGlow1{
+  0%,100%{transform:translate3d(0,0,0) scale(1)}
+  50%{transform:translate3d(var(--mx,0),var(--my,0),0) translate3d(0,-4vmax,0) scale(1.12)}
+}
+@keyframes authGlow2{
+  0%,100%{transform:translate3d(0,0,0) scale(1)}
+  33%{transform:translate3d(var(--mx,0),var(--my,0),0) translate3d(0,3vmax,0) scale(1.08)}
+  66%{transform:translate3d(var(--mx,0),var(--my,0),0) translate3d(-2vmax,-2vmax,0) scale(.94)}
+}
+@keyframes authOrb1{
+  0%,100%{transform:translate3d(var(--mx,0),var(--my,0),0) scale(1)}
+  50%{transform:translate3d(var(--mx,0),var(--my,0),0) translate3d(6vmax,-7vmax,0) scale(1.16)}
+}
+@keyframes authOrb2{
+  0%,100%{transform:translate3d(var(--mx,0),var(--my,0),0) scale(1)}
+  50%{transform:translate3d(var(--mx,0),var(--my,0),0) translate3d(-5vmax,6vmax,0) scale(1.12)}
+}
+@keyframes authOrb3{
+  0%,100%{transform:translate3d(var(--mx,0),var(--my,0),0) translate3d(0,0,0) scale(1)}
+  25%{transform:translate3d(var(--mx,0),var(--my,0),0) translate3d(3vmax,2vmax,0) scale(1.1)}
+  75%{transform:translate3d(var(--mx,0),var(--my,0),0) translate3d(-2vmax,-3vmax,0) scale(.92)}
+}
+@keyframes authRingA{
+  0%,100%{transform:translate3d(var(--mx,0),var(--my,0),0) scale(1);opacity:.85}
+  50%{transform:translate3d(var(--mx,0),var(--my,0),0) scale(1.03);opacity:1}
+}
+@keyframes authRingB{
+  0%,100%{transform:translate3d(var(--mx,0),var(--my,0),0) scale(1);opacity:.7}
+  50%{transform:translate3d(var(--mx,0),var(--my,0),0) scale(1.05);opacity:.9}
+}
+@keyframes authGridPulse{
+  0%,100%{opacity:.06;transform:scale(1)}
+  50%{opacity:.14;transform:scale(1.03)}
+}
+@keyframes authParticle{
+  0%{transform:translate3d(var(--dx,0),0,0)}
+  100%{transform:translate3d(var(--dx,0),-110vh,0)}
+}
+
+@media(max-width:1000px){
+  .auth-p:nth-child(n+13){display:none}
+  .auth-bg-orb--3{display:none}
+}
+@media(max-width:720px){
+  .auth-bg-glow--1,.auth-bg-glow--2{filter:blur(40px)}
+  .auth-bg-orb--2{display:none}
+  .auth-p:nth-child(n+11){display:none}
+  .dna-network-canvas{opacity:.6}
+}
+@media(prefers-reduced-motion:reduce){
+  .auth-bg-glow,.auth-bg-orb,.auth-bg-grid,.auth-p{animation:none}
+  .login-promo:before,.login-promo:after{animation:none}
+  .auth-bg-glow--1,.auth-bg-glow--2,.auth-bg-orb--1,.auth-bg-orb--2,.auth-bg-orb--3,.auth-bg-grid{opacity:.10}
+  .auth-p{display:none}
+  .dna-network-canvas{display:none}
+}

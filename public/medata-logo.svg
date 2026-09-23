@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-labelledby="title desc">
+  <title id="title">MeData</title>
+  <desc id="desc">MeData Sistem Monitoring Siswa</desc>
+  <defs>
+    <linearGradient id="teal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#13cfc4"/><stop offset="1" stop-color="#006d86"/></linearGradient>
+    <linearGradient id="navy" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#132b4b"/><stop offset="1" stop-color="#071a36"/></linearGradient>
+  </defs>
+  <path d="M300 330C245 270 135 210 135 125 135 65 207 44 253 91l47 48 47-48c46-47 118-26 118 34 0 85-110 145-165 205z" fill="none" stroke="url(#teal)" stroke-width="25" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="238" cy="151" r="29" fill="url(#teal)"/>
+  <path d="M184 235c0-35 24-56 55-56s55 21 55 56v55h-110z" fill="url(#teal)"/>
+  <path d="m196 220 42 47 92-91" fill="none" stroke="#fff" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M355 244v52M399 210v86M443 164v132" fill="none" stroke="url(#teal)" stroke-width="25" stroke-linecap="round"/>
+  <path d="M259 319c48-32 121-31 173-56 30-14 53-37 73-67-16 49-49 91-94 111-43 19-105 16-152 45-20 12-34 3-36-11-2-9 11-17 36-22z" fill="url(#teal)"/>
+  <text x="300" y="430" text-anchor="middle" font-family="Arial, sans-serif" font-size="91" font-weight="800" fill="url(#navy)">Me<tspan fill="url(#teal)">Data</tspan></text>
+  <path d="M92 478h35M473 478h35" stroke="#08aaa8" stroke-width="5"/>
+  <text x="300" y="488" text-anchor="middle" font-family="Arial, sans-serif" font-size="19" font-weight="700" letter-spacing="5" fill="#526984">SISTEM MONITORING SISWA</text>
+</svg>

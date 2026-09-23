@@ -1,0 +1,37 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function userRole() { return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role; }
+    function isAdmin() { return signedIn() && userRole() == 'admin'; }
+    function isPetugasOrAdmin() { return signedIn() && (userRole() == 'petugas' || userRole() == 'admin' || !exists(/databases/$(database)/documents/users/$(request.auth.uid))); }
+
+    // Users can read profile, update their own or if admin, admin can list & manage
+    match /users/{userId} {
+      allow read: if signedIn();
+      allow update: if signedIn() && (request.auth.uid == userId || isAdmin());
+      allow create: if signedIn() && (request.auth.uid == userId || isAdmin());
+      allow delete: if isAdmin();
+    }
+
+    match /students/{studentId} {
+      allow read: if signedIn();
+      allow create, update: if isPetugasOrAdmin();
+      allow delete: if isAdmin();
+    }
+    match /visits/{visitId} {
+      allow read: if signedIn();
+      allow create, update: if isPetugasOrAdmin();
+      allow delete: if isAdmin();
+    }
+    match /locations/{locationId} {
+      allow read: if signedIn();
+      allow write: if isAdmin();
+    }
+    match /activity_logs/{logId} {
+      allow read: if isAdmin();
+      allow create: if signedIn() && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if false;
+    }
+  }
+}
