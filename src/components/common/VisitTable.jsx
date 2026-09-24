@@ -4,7 +4,7 @@ import { useRealtimeClock } from '../../hooks/useRealtimeClock'
 
 const LOCALE_MAP = { id: 'id-ID', en: 'en-US', ar: 'ar-SA', ja: 'ja-JP', ko: 'ko-KR', zh: 'zh-CN' }
 
-export default function VisitTable({ visits, activeOnly = false, onCheckOut, onDelete, onTreatment, onNotifyWA, onToggleBlock }) {
+export default function VisitTable({ visits, activeOnly = false, onCheckOut, onDelete, onTreatment, onNotifyWA, onToggleSelect, isSelected, onSelectAll }) {
   const { t, lang } = useLanguage()
   const { now, formatDuration } = useRealtimeClock()
   const locale = LOCALE_MAP[lang] || 'id-ID'
@@ -46,6 +46,17 @@ export default function VisitTable({ visits, activeOnly = false, onCheckOut, onD
       <table>
         <thead>
           <tr>
+            {onToggleSelect && (
+              <th style={{ width: 36 }}>
+                <input
+                  type="checkbox"
+                  aria-label={t('visitTable.selectAll')}
+                  title={t('visitTable.selectAll')}
+                  checked={isSelected(items)}
+                  onChange={() => onSelectAll(items)}
+                />
+              </th>
+            )}
             <th>{t('visitTable.colStudent')}</th>
             <th>{t('visitTable.colClass')}</th>
             <th>{t('visitTable.colLocation')}</th>
@@ -56,7 +67,6 @@ export default function VisitTable({ visits, activeOnly = false, onCheckOut, onD
             <th>{t('visitTable.colStatus')}</th>
             {onTreatment && <th>{t('visitTable.colTreatment')}</th>}
             {onNotifyWA && <th>{t('visitTable.colNotify')}</th>}
-            {onToggleBlock && <th>{t('visitTable.colBlock')}</th>}
             {onCheckOut && <th />}
             {onDelete && <th />}
           </tr>
@@ -64,6 +74,16 @@ export default function VisitTable({ visits, activeOnly = false, onCheckOut, onD
         <tbody>
           {items.map((visit) => (
             <tr key={visit.id}>
+              {onToggleSelect && (
+                <td>
+                  <input
+                    type="checkbox"
+                    aria-label={`${t('visitTable.select')} ${visit.studentName}`}
+                    checked={isSelected([visit])}
+                    onChange={() => onToggleSelect(visit)}
+                  />
+                </td>
+              )}
               <td>
                 <strong>{visit.studentName}</strong>
                 <small>{visit.nis || t('common.dash')}</small>
@@ -135,30 +155,9 @@ export default function VisitTable({ visits, activeOnly = false, onCheckOut, onD
                   </button>
                 </td>
               )}
-              {onToggleBlock && visit.status === 'ACTIVE' && (
-                <td>
-                  <input
-                    type="checkbox"
-                    checked={visit.blocked === true}
-                    onChange={() => onToggleBlock(visit)}
-                    title={t('visitTable.blockCheckbox')}
-                    aria-label={t('visitTable.blockCheckbox')}
-                  />
-                  {visit.blocked === true && (
-                    <small className="muted" style={{ display: 'block', marginTop: '3px', fontSize: '11px' }}>
-                      {t('visitTable.blocked')}
-                    </small>
-                  )}
-                </td>
-              )}
               {onCheckOut && (
                 <td>
-                  <button
-                    className="btn-small"
-                    onClick={() => onCheckOut(visit)}
-                    disabled={visit.blocked === true}
-                    title={visit.blocked === true ? t('visitTable.blockedTitle') : undefined}
-                  >
+                  <button className="btn-small" onClick={() => onCheckOut(visit)}>
                     <LogOut size={14} /> {t('visitTable.checkoutBtn')}
                   </button>
                 </td>

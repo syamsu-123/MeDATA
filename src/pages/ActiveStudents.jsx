@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { RefreshCw, MessageCircle, X } from 'lucide-react'
+import { RefreshCw, MessageCircle, X, LogOut } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import { useLocationContext } from '../context/LocationContext'
 import { useToast } from '../context/ToastContext'
 import { useLanguage } from '../context/LanguageContext'
-import { checkOut, subscribeVisits, updateTreatmentStatus, setVisitBlocked } from '../services/firestoreService'
+import { checkOut, subscribeVisits, updateTreatmentStatus } from '../services/firestoreService'
 import VisitTable from '../components/common/VisitTable'
 import { useRealtimeClock } from '../hooks/useRealtimeClock'
 
@@ -30,6 +30,8 @@ export default function ActiveStudents() {
   const [term, setTerm] = useState('')
   const [classFilter, setClassFilter] = useState('')
   const [statusFilter, setStatusFilter] = useState('')
+  const [selected, setSelected] = useState(new Set())
+  const [bulkTarget, setBulkTarget] = useState(null)
   const locale = LOCALE_MAP[lang] || 'id-ID'
   const loadedRef = useRef(false)
   const [locationKey, setLocationKey] = useState(activeLocation)
@@ -63,11 +65,6 @@ export default function ActiveStudents() {
   const done = async () => {
     if (isViewer) {
       showToast(t('active.viewerCheckoutError'), 'error')
-      setTarget(null)
-      return
-    }
-    if (target.blocked === true) {
-      showToast(t('active.blockedCheckoutError'), 'error')
       setTarget(null)
       return
     }
@@ -108,15 +105,40 @@ export default function ActiveStudents() {
     }
   }
 
-  const toggleBlock = async (visit) => {
+  const toggleSelect = (visit) => {
+    setSelected((prev) => {
+      const next = new Set(prev)
+      if (next.has(visit.id)) next.delete(visit.id)
+      else next.add(visit.id)
+      return next
+    })
+  }
+
+  const allSelected = (items) => items.length > 0 && items.every((v) => selected.has(v.id))
+
+  const toggleSelectAll = (items) => {
+    setSelected((prev) => {
+      const next = new Set(prev)
+      if (allSelected(items)) items.forEach((v) => next.delete(v.id))
+      else items.forEach((v) => next.add(v.id))
+      return next
+    })
+  }
+
+  const bulkCheckout = async () => {
     if (isViewer) return
-    const next = visit.blocked !== true
+    const visitsToCheckout = selectedVisits
+    if (!visitsToCheckout.length) return
     setBusy(true)
     try {
-      await setVisitBlocked(visit.id, next, user.uid)
-      showToast(next ? t('active.blockApplied') : t('active.blockRemoved'))
+      for (const visit of visitsToCheckout) {
+        await checkOut(visit, user.uid)
+      }
+      showToast(`${t('active.bulkCheckoutSuccess')} ${visitsToCheckout.length} ${t('common.active')}`)
+      setSelected(new Set())
+      setBulkTarget(null)
     } catch {
-      showToast(t('active.blockFailed'), 'error')
+      showToast(t('active.checkoutFailed'), 'error')
     } finally {
       setBusy(false)
     }
@@ -141,6 +163,11 @@ export default function ActiveStudents() {
       return true
     })
   }, [visits, term, classFilter, statusFilter, t])
+
+  const selectedVisits = useMemo(
+    () => filteredVisits.filter((v) => selected.has(v.id)),
+    [filteredVisits, selected],
+  )
 
   const classOptions = useMemo(() => {
     const set = new Set(
@@ -332,13 +359,32 @@ export default function ActiveStudents() {
         )}
       </div>
 
+      {selected.size > 0 && !isViewer && (
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap', margin: '0 0 16px', padding: '10px 14px', background: 'var(--md-surface-2, #132B3D)', border: '1px solid var(--md-border, #1E3A4A)', borderRadius: '10px' }}>
+          <span className="muted" style={{ fontSize: '13px', fontWeight: 700 }}>
+            {t('active.selectedCount')}: {selected.size}
+          </span>
+          <button
+            type="button"
+            className="btn-primary"
+            onClick={() => setBulkTarget(true)}
+            disabled={busy}
+          >
+            <LogOut size={15} /> {t('active.checkoutSelected')} ({selected.size})
+          </button>
+          <button type="button" className="btn-secondary" onClick={() => setSelected(new Set())} disabled={busy}>
+            <X size={15} /> {t('students.filterReset')}
+          </button>
+        </div>
+      )}
+
       {isLoading ? (
         <div className="empty-state">
           <span className="live-pulse-dot online" />
           <strong>{t('common.loading')}</strong>
         </div>
       ) : (
-        <VisitTable visits={filteredVisits} activeOnly onCheckOut={isViewer ? null : setTarget} onTreatment={isViewer ? null : openTreatment} onNotifyWA={isViewer ? null : openWa} onToggleBlock={isViewer ? null : toggleBlock} />
+        <VisitTable visits={filteredVisits} activeOnly onCheckOut={isViewer ? null : setTarget} onTreatment={isViewer ? null : openTreatment} onNotifyWA={isViewer ? null : openWa} onToggleSelect={isViewer ? null : toggleSelect} isSelected={allSelected} onSelectAll={toggleSelectAll} />
       )}
 
       {target && !isViewer && (
@@ -379,6 +425,35 @@ export default function ActiveStudents() {
               </button>
               <button type="button" className="btn-primary" onClick={done} disabled={busy}>
                 {busy ? t('common.processing') : t('active.checkoutBtn')}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {bulkTarget && !isViewer && (
+        <div className="modal-backdrop">
+          <div className="dialog">
+            <h3>{t('active.bulkCheckoutTitle')}</h3>
+            <p>
+              {t('active.bulkCheckoutMsg')} <strong>{selectedVisits.length}</strong> {t('active.bulkCheckoutMsg2')}
+            </p>
+            <ul style={{ margin: '14px 0', paddingLeft: '20px', display: 'grid', gap: '6px', fontSize: '13px', maxHeight: '180px', overflow: 'auto' }}>
+              {selectedVisits.map((v) => (
+                <li key={v.id}>
+                  <strong>{v.studentName}</strong>{' '}
+                  <span className="muted">
+                    {v.studentClass || t('common.dash')} · {v.nis || t('common.dash')}
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <div className="dialog-actions">
+              <button type="button" className="btn-secondary" onClick={() => setBulkTarget(null)} disabled={busy}>
+                {t('common.cancel')}
+              </button>
+              <button type="button" className="btn-primary" onClick={bulkCheckout} disabled={busy}>
+                {busy ? t('common.processing') : `${t('active.checkoutSelected')} (${selectedVisits.length})`}
               </button>
             </div>
           </div>
