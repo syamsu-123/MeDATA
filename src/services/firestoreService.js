@@ -68,6 +68,14 @@ export const updateTreatmentStatus = async (visitId, treatmentStatus, treatmentN
   await updateDoc(doc(db, 'visits', visitId), payload)
   return logActivity(uid, 'TREATMENT_UPDATE', `Status penanganan diperbarui menjadi ${treatmentStatus}`)
 }
+export const setVisitBlocked = async (visitId, blocked, uid) => {
+  await updateDoc(doc(db, 'visits', visitId), {
+    blocked,
+    blockedAt: blocked ? new Date().toISOString() : null,
+    blockedBy: blocked ? uid : null,
+  })
+  return logActivity(uid, blocked ? 'VISIT_BLOCKED' : 'VISIT_UNBLOCKED', blocked ? 'Check-out siswa diblokir' : 'Blokir check-out siswa dicabut')
+}
 export const logActivity = (userId, action, description) =>
   addDoc(collection(db, 'activity_logs'), {
     userId,

@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext'
 import { useLocationContext } from '../context/LocationContext'
 import { useToast } from '../context/ToastContext'
 import { useLanguage } from '../context/LanguageContext'
-import { checkOut, subscribeVisits, updateTreatmentStatus } from '../services/firestoreService'
+import { checkOut, subscribeVisits, updateTreatmentStatus, setVisitBlocked } from '../services/firestoreService'
 import VisitTable from '../components/common/VisitTable'
 import { useRealtimeClock } from '../hooks/useRealtimeClock'
 
@@ -66,6 +66,11 @@ export default function ActiveStudents() {
       setTarget(null)
       return
     }
+    if (target.blocked === true) {
+      showToast(t('active.blockedCheckoutError'), 'error')
+      setTarget(null)
+      return
+    }
     setBusy(true)
     try {
       await checkOut(target, user.uid)
@@ -98,6 +103,20 @@ export default function ActiveStudents() {
       setTreatmentTarget(null)
     } catch {
       showToast(t('active.treatmentFailed'), 'error')
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  const toggleBlock = async (visit) => {
+    if (isViewer) return
+    const next = visit.blocked !== true
+    setBusy(true)
+    try {
+      await setVisitBlocked(visit.id, next, user.uid)
+      showToast(next ? t('active.blockApplied') : t('active.blockRemoved'))
+    } catch {
+      showToast(t('active.blockFailed'), 'error')
     } finally {
       setBusy(false)
     }
@@ -319,7 +338,7 @@ export default function ActiveStudents() {
           <strong>{t('common.loading')}</strong>
         </div>
       ) : (
-        <VisitTable visits={filteredVisits} activeOnly onCheckOut={isViewer ? null : setTarget} onTreatment={isViewer ? null : openTreatment} onNotifyWA={isViewer ? null : openWa} />
+        <VisitTable visits={filteredVisits} activeOnly onCheckOut={isViewer ? null : setTarget} onTreatment={isViewer ? null : openTreatment} onNotifyWA={isViewer ? null : openWa} onToggleBlock={isViewer ? null : toggleBlock} />
       )}
 
       {target && !isViewer && (
